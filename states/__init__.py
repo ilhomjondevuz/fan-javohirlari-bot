@@ -1,0 +1,2 @@
+from .application_doc import ApplicationStatesGroup
+from .register import RegisterStatesGroup

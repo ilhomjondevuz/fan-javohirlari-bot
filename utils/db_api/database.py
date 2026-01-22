@@ -22,20 +22,23 @@ class Database:
         if not self.connection:
             raise RuntimeError("Database is not connected")
 
-    async def select_user(self, tg_id: str):
+    async def select_user(self, tg_id: str) -> dict | None:
         self._check_connection()
-        return await self.connection.fetchrow(
+        record = await self.connection.fetchrow(
             "SELECT * FROM users WHERE tg_id=$1",
             tg_id
         )
+        if record:
+            return dict(record)  # Record → dict
+        return None
 
-    async def insert_user(self, fullname, phone, username, passport, tg_id):
+    async def insert_user(self, fullname, phone, username, passport, tg_id, language):
         tg_id = str(tg_id)  # stringga o'zgartirish
         query = """
-                INSERT INTO users (fullname, phone, username, passport, tg_id)
-                VALUES ($1, $2, $3, $4, $5) \
+                INSERT INTO users (fullname, phone, username, passport, tg_id, language)
+                VALUES ($1, $2, $3, $4, $5, $6) \
                 """
-        await self.connection.execute(query, fullname, phone, username, passport, tg_id)
+        await self.connection.execute(query, fullname, phone, username, passport, tg_id, language)
 
     async def update_user(self, fullname, phone, username, passport, tg_id):
         self._check_connection()
@@ -51,6 +54,12 @@ class Database:
             passport,
             tg_id
         )
+
+    async def select_directions(self) -> list[dict]:
+        self._check_connection()
+        query = "SELECT * FROM directions"
+        records = await self.connection.fetch(query)
+        return [dict(record) for record in records]
 
     async def close(self):
         if self.connection:

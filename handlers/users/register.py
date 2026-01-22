@@ -5,17 +5,34 @@ from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 
+from keyboards.default import send_phone
 from loader import dp
 from states.register import RegisterStatesGroup
 from utils.db_api.database import db
 
+
+@dp.message(F.text, StateFilter(RegisterStatesGroup.lang))
+async def choice_lang(message: Message, state: FSMContext):
+    global lang
+    if message.text == "🇺🇿 O'zbek tili":
+        lang = 'uz'
+    elif message.text == "🇬🇧 English":
+        lang = 'en'
+    elif message.text == "🇷🇺 Russian":
+        lang = 'ru'
+    await state.update_data(lang=lang)
+    await message.answer(
+        f"Endi quyidagi tugmani bosib telefon raqamingizni yuboring",
+        reply_markup=await send_phone()
+    )
+    await state.set_state(RegisterStatesGroup.phone)
 
 @dp.message(lambda message: message.text == 'hello')
 async def send_hello(msg: types.Message):
     await msg.answer("Va alaykum salom")
 
 @dp.message(F.contact, StateFilter(RegisterStatesGroup.phone))
-async def send_phone(msg: Message, state: FSMContext):
+async def send_phone_msg(msg: Message, state: FSMContext):
     await state.update_data(phone=str(msg.contact.phone_number), username=msg.from_user.username)
     await msg.answer("Endi passport seriaingizni yuboring", reply_markup=ReplyKeyboardRemove())
     await state.set_state(RegisterStatesGroup.passport)
