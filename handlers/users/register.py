@@ -5,9 +5,9 @@ from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 
-from app import db
 from loader import dp
 from states.register import RegisterStatesGroup
+from utils.db_api.database import db
 
 
 @dp.message(lambda message: message.text == 'hello')

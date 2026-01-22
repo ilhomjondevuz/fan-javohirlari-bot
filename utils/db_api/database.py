@@ -62,3 +62,6 @@ class Database:
     async def close(self):
         if self.connection:
             await self.connection.close()
+
+
+db = Database()
