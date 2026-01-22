@@ -1,0 +1,1 @@
+# aiogram3.24.0-bot-template
