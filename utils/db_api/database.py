@@ -30,19 +30,12 @@ class Database:
         )
 
     async def insert_user(self, fullname, phone, username, passport, tg_id):
-        self._check_connection()
+        tg_id = str(tg_id)  # stringga o'zgartirish
         query = """
-        INSERT INTO users (fullname, phone, username, passport, tg_id)
-        VALUES ($1, $2, $3, $4, $5)
-        """
-        await self.connection.execute(
-            query,
-            fullname,
-            phone,
-            username,
-            passport,
-            tg_id
-        )
+                INSERT INTO users (fullname, phone, username, passport, tg_id)
+                VALUES ($1, $2, $3, $4, $5) \
+                """
+        await self.connection.execute(query, fullname, phone, username, passport, tg_id)
 
     async def update_user(self, fullname, phone, username, passport, tg_id):
         self._check_connection()
