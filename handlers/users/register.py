@@ -20,7 +20,7 @@ async def choice_lang(message: Message, state: FSMContext):
         lang = 'en'
     elif message.text == "🇷🇺 Russian":
         lang = 'ru'
-    await state.update_data(lang=lang)
+    await state.update_data(language=lang)
     await message.answer(
         f"Endi quyidagi tugmani bosib telefon raqamingizni yuboring",
         reply_markup=await send_phone()
@@ -43,7 +43,7 @@ async def send_passport(msg: Message, state: FSMContext):
         passport = msg.text.upper()
         await state.update_data(passport=passport)
         data = await state.get_data()
-        print(data)
+        # print(data)
         await db.insert_user(**data)
         await msg.answer(f"Siz muvaffaqiyatli ro'yxatdan o'tdingiz")
         await state.clear()

@@ -1,2 +1,3 @@
 from .application_doc import ApplicationStatesGroup
 from .register import RegisterStatesGroup
+from .change_lang_states_group import ChangeLangStatesGroup

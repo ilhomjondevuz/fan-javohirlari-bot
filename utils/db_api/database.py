@@ -61,6 +61,13 @@ class Database:
         records = await self.connection.fetch(query)
         return [dict(record) for record in records]
 
+    async def change_language(self, tg_id, language):
+        self._check_connection()
+        query = """
+        UPDATE users SET language=$1 WHERE tg_id=$2
+        """
+        await self.connection.execute(query, language, tg_id)
+
     async def close(self):
         if self.connection:
             await self.connection.close()
