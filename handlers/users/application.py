@@ -6,12 +6,27 @@ from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery
 from keyboards.inline.direction_inline import direction_menu
 from loader import dp
 from states import ApplicationStatesGroup
+from utils.db_api import TEXTS
 from utils.db_api.database import db
 
 
-@dp.message(F.text == "📄 O'qishga hujjat topshirish")
+@dp.message(F.text.in_(TEXTS['applications']))
 async def application(message: Message, state: FSMContext):
-    await message.answer("Isn-familiyangizni to'liq kiriting:", reply_markup=ReplyKeyboardRemove())
+    user = await db.select_user(str(message.from_user.id))
+
+    if user['language'] == 'uz':
+        resp_text = TEXTS['input_fullname_uz']
+    elif user['language'] == 'ru':
+        resp_text = TEXTS['input_fullname_ru']
+    elif user['language'] == 'en':
+        resp_text = TEXTS['input_fullname_en']
+    else:
+        resp_text = TEXTS['error_fullname']
+
+    await message.answer(
+        text=resp_text,
+        reply_markup=ReplyKeyboardRemove()
+    )
     await state.set_state(ApplicationStatesGroup.fullname)
 
 @dp.message(StateFilter(ApplicationStatesGroup.fullname), F.text)

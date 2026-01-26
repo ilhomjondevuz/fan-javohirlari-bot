@@ -6,5 +6,14 @@ TEXTS = {
         "🇺🇿 O'zbek tili",
         "🇬🇧 English",
         "🇷🇺 Russian",
-    ]
+    ],
+    "applications": [
+    "📄 O'qishga hujjat topshirish",
+    "📄 Submit Documents",
+    "📄 Подать документы",
+    ],
+    "input_fullname_uz": "Ism-familiyangizni to‘liq kiriting:",
+    "input_fullname_en": "Please enter your full name:",
+    "input_fullname_ru": "Пожалуйста, введите ваше полное имя:",
+    "error_fullname": "Error"
 }

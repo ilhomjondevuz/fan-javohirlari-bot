@@ -32,6 +32,22 @@ async def menu_keyboard_uz() -> ReplyKeyboardMarkup:
         one_time_keyboard=False  # doim ko'rinadigan klaviatura
     )
 
+async def admin_menu_keyboard_uz() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text="👥 Barcha o'quvchilar"),
+                KeyboardButton(text="➕📝 Test qo'shish")
+            ],
+            [
+                KeyboardButton(text="🎓 Ta'lim yo'nalishlari"),
+                KeyboardButton(text="💰 Kontrakt narxlari")
+            ]
+        ],
+        resize_keyboard=True
+    )
+
+
 async def menu_keyboard_en() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
@@ -64,6 +80,22 @@ async def menu_keyboard_en() -> ReplyKeyboardMarkup:
         one_time_keyboard=False  # doim ko'rinadigan klaviatura
     )
 
+async def admin_menu_keyboard_en() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text="👥 All students"),
+                KeyboardButton(text="➕📝 Add test")
+            ],
+            [
+                KeyboardButton(text="🎓 Education programs"),
+                KeyboardButton(text="💰 Tuition fees")
+            ]
+        ],
+        resize_keyboard=True
+    )
+
+
 async def menu_keyboard_ru() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
@@ -95,3 +127,19 @@ async def menu_keyboard_ru() -> ReplyKeyboardMarkup:
         resize_keyboard=True,  # klaviaturani moslash
         one_time_keyboard=False  # doim ko'rinadigan klaviatura
     )
+
+async def admin_menu_keyboard_ru() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text="👥 Все ученики"),
+                KeyboardButton(text="➕📝 Добавить тест")
+            ],
+            [
+                KeyboardButton(text="🎓 Направления обучения"),
+                KeyboardButton(text="💰 Стоимость контракта")
+            ]
+        ],
+        resize_keyboard=True
+    )
+
