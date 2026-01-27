@@ -32,6 +32,18 @@ class Database:
             return dict(record)  # Record → dict
         return None
 
+    async def select_users_count(self) -> int | None:
+        self._check_connection()
+        query = """select count(*) from users"""
+        records = await self.connection.fetch(query)
+        return records[0][0]
+
+    async def select_users(self) -> list[dict] | None:
+        self._check_connection()
+        query = """select fullname, phone, username, passport, tg_id, language from users"""
+        records = await self.connection.fetch(query)
+        return [dict(record) for record in records]
+
     async def insert_user(self, fullname, phone, username, passport, tg_id, language):
         tg_id = str(tg_id)  # stringga o'zgartirish
         query = """
