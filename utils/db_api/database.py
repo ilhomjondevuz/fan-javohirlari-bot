@@ -80,6 +80,12 @@ class Database:
         """
         await self.connection.execute(query, language, tg_id)
 
+    async def select_sciences(self) -> list[dict]:
+        self._check_connection()
+        query = "SELECT * FROM sciences"
+        records = await self.connection.fetch(query)
+        return [dict(record) for record in records]
+
     async def close(self):
         if self.connection:
             await self.connection.close()
