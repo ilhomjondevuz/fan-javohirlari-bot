@@ -42,6 +42,10 @@ async def admin_menu_keyboard_uz() -> ReplyKeyboardMarkup:
             [
                 KeyboardButton(text="🎓 Ta'lim yo'nalishlari"),
                 KeyboardButton(text="💰 Kontrakt narxlari")
+            ],
+            [
+                KeyboardButton(text="📝 Imtihon qo'shish"),
+                KeyboardButton(text="🧪 Testlar bo'limi")
             ]
         ],
         resize_keyboard=True
@@ -88,8 +92,12 @@ async def admin_menu_keyboard_en() -> ReplyKeyboardMarkup:
                 KeyboardButton(text="➕📝 Add test")
             ],
             [
-                KeyboardButton(text="🎓 Education programs"),
-                KeyboardButton(text="💰 Tuition fees")
+                KeyboardButton(text="🎓 Education fields"),
+                KeyboardButton(text="💰 Contract prices")
+            ],
+            [
+                KeyboardButton(text="📝 Add exam"),
+                KeyboardButton(text="🧪 Test Section")
             ]
         ],
         resize_keyboard=True
@@ -137,7 +145,11 @@ async def admin_menu_keyboard_ru() -> ReplyKeyboardMarkup:
             ],
             [
                 KeyboardButton(text="🎓 Направления обучения"),
-                KeyboardButton(text="💰 Стоимость контракта")
+                KeyboardButton(text="💰 Стоимость контрактов")
+            ],
+            [
+                KeyboardButton(text="📝 Добавить экзамен"),
+                KeyboardButton(text="🧪 Раздел тестов")
             ]
         ],
         resize_keyboard=True

@@ -19,4 +19,7 @@ TEXTS = {
     "admin_menu_users_uz": "👥 Barcha o'quvchilar",
     "admin_menu_users_en": "👥 All students",
     "admin_menu_users_ru": "👥 Все ученики",
+    "add_test_uz": "🧪 Testlar bo'limi",
+    "add_test_en": "🧪 Test Section",
+    "add_test_ru": "🧪 Раздел тестов",
 }

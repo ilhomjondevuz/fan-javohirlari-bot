@@ -1,3 +1,5 @@
+from typing import Optional
+
 import asyncpg
 from environs import Env
 
@@ -85,6 +87,29 @@ class Database:
         query = "SELECT * FROM sciences"
         records = await self.connection.fetch(query)
         return [dict(record) for record in records]
+
+    async def add_science(self, name_uz: str, name_en: str, name_ru: str):
+        self._check_connection()
+        query = """INSERT INTO sciences (name_uz, name_en, name_ru) values ($1, $2, $3) \
+        """
+        await self.connection.execute(query, name_uz, name_en, name_ru)
+
+    async def add_test(self, science_id: Optional[int], test_name: str, description: Optional[str] = None) -> int:
+        """
+        Jadvalga yangi test qo'shadi va yangi test id ni qaytaradi.
+
+        :param science_id: int yoki None, test qaysi fan bilan bog'liq
+        :param test_name: test nomi
+        :param description: test haqida matn
+        :return: yangi testning id si
+        """
+        query = """
+        INSERT INTO tests (science_id, test_name, description)
+        VALUES ($1, $2, $3)
+        RETURNING id;
+        """
+        test_id = await db.connection.fetchval(query, science_id, test_name, description)
+        return test_id
 
     async def close(self):
         if self.connection:
